@@ -17,23 +17,24 @@ class Controller extends GetxController {
     "Purchase Mockup"
   ];
   List<String> titleCheckCreate = [
-    'Color Pallete',
-    "Tipography Study",
-    "Purchase Mockup"
+    // 'Color Pallete',
+    // "Tipography Study",
+    // "Purchase Mockup"
   ];
   List<bool> checkCreate = [
-  false,
-  false,
-  false,];
+  // false,
+  // false,
+  // false,
+  ];
   List<bool> check = [
     false,
-    true,
     false,
     false,
     false,
     false,
     false,
-    true,
+    false,
+    false,
     false,
   ];
   List<String> title = [
@@ -73,18 +74,21 @@ class Controller extends GetxController {
     false,
   ];
   List<MemberObj> listMember=[
-    MemberObj("assets/images/avatar1.png", "Tonny Stark", "Project Manager"),
-    MemberObj("assets/images/avatar2.png", "Elizabeth Olsen", "Project Manager"),
-    MemberObj("assets/images/avatar3.png", "Lulu Utek", "UX Designer"),
-    MemberObj("assets/images/avatar1.png", "Tonny Stark", "Project Manager"),
-    MemberObj("assets/images/avatar2.png", "Elizabeth Olsen", "Project Manager"),
-    MemberObj("assets/images/avatar3.png", "Lulu Utek", "UX Designer"),
-    MemberObj("assets/images/avatar1.png", "Tonny Stark", "Project Manager"),
-    MemberObj("assets/images/avatar2.png", "Elizabeth Olsen", "Project Manager"),
-    MemberObj("assets/images/avatar3.png", "Lulu Utek", "UX Designer"),
-    MemberObj("assets/images/avatar1.png", "Tonny Stark", "Project Manager"),
-    MemberObj("assets/images/avatar2.png", "Elizabeth Olsen", "Project Manager"),
-    MemberObj("assets/images/avatar3.png", "Lulu Utek", "UX Designer"),
+    MemberObj("assets/images/avatar3.png", "Tonny Stark", "Project Manager",false),
+    MemberObj("assets/images/avatar2.png", "Elizabeth Olsen","Project Manager",false),
+    MemberObj("assets/images/avatar1.png", "Lulu Utek", "UX Designer",false),
+    MemberObj("assets/images/avatar1.png", "Tonny Stark","Project Manager",false),
+    MemberObj("assets/images/avatar2.png", "Elizabeth Olsen", "Project Manager",false),
+    MemberObj("assets/images/avatar3.png", "Lulu Utek", "UX Designer",false),
+    MemberObj("assets/images/avatar1.png", "Tonny Stark", "Project Manager",false),
+    MemberObj("assets/images/avatar2.png", "Elizabeth Olsen","Project Manager",false),
+    MemberObj("assets/images/avatar3.png", "Lulu Utek", "UX Designer",false),
+    MemberObj("assets/images/avatar1.png", "Tonny Stark", "Project Manager",false),
+    MemberObj("assets/images/avatar2.png", "Elizabeth Olsen","Project Manager",false),
+    MemberObj("assets/images/avatar3.png", "Lulu Utek", "UX Designer",false),
+  ];
+  List<MemberObj> listMemberSelect=[
+
   ];
 
 }

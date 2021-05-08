@@ -1,12 +1,12 @@
-
+import 'package:flutter_useinterface1/Models/picture_model.dart';
 import 'package:flutter_useinterface1/Models/todo_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseTodo {
-
   static const String DB_NAME = "todo_database.db";
   static const String TABLE_TODO = "todos";
+  static const String TABLE_IMAGE = "images";
   DatabaseTodo._internal();
   static final DatabaseTodo instant = DatabaseTodo._internal();
 
@@ -19,6 +19,15 @@ class DatabaseTodo {
       onCreate: (dbb, version) {
         return dbb.execute(
           "CREATE TABLE $TABLE_TODO(id INTEGER PRIMARY KEY, task_name TEXT, division TEXT , branding TEXT)",
+        );
+      },
+    );
+    db = await openDatabase(
+      join(await getDatabasesPath(), DB_NAME),
+      version: 1,
+      onCreate: (dbb, version) {
+        return dbb.execute(
+          "CREATE $TABLE_IMAGE(id INTEGER PRIMARY KEY, title TEXT, picture BLOB )",
         );
       },
     );
@@ -40,13 +49,19 @@ class DatabaseTodo {
     return maps.map((e) => Todo.formJson(e)).toList();
   }
 
-// Future<bool> updateMovie(Todo todo) async {
-//   final db = await database;
-//   final result =
-//   await db.update(TABLE_TODO, todo.toMap(), where: "id = ?", whereArgs: [todo.id]);
-//   return result >= 0;
-// }
+  Future savePicture(Picture picture) async {
+    return
+    await db.insert(TABLE_IMAGE, picture.toMap());
+  }
 
-
+  Future<List<Picture>> getPictures() async {
+    List<Map> list = await db.rawQuery('SELECT * FROM $TABLE_IMAGE');
+    List<Picture> pictures = [];
+    for (int i = 0; i < list.length; i++) {
+      pictures.add(new Picture(list[i]["id"], list[i]["text"], list[i]["picture"]));
+    }
+    print(pictures.length);
+    return pictures;
+  }
 }
 

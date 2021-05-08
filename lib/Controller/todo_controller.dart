@@ -13,10 +13,10 @@ class TodoController extends GetxController{
   TextEditingController branding= TextEditingController();
 
   insertTodo() {
-    DatabaseTodo.instant.addTodo(Todo(1, taskname.text, "branding.text", devision.text));
+    dataBase.addTodo(Todo(1, taskname.text, "branding.text", devision.text));
+
   }
   getTodo() async{
-    final list = await dataBase.getAllTodo();
-    print(list[0].branding);
+    dataBase.getPictures();
   }
 }

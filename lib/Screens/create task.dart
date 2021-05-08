@@ -18,10 +18,12 @@ class _CreateTaskState extends State<CreateTask> {
   TextEditingController taskname= TextEditingController();
   TextEditingController devision= TextEditingController();
   TextEditingController branding= TextEditingController();
-
+  TextEditingController taskname2= TextEditingController();
   DateTime date = DateTime.now();
   String valueStart = DateFormat('dd/MM/yyyy').format(DateTime.now());
   String valueDue = DateFormat('dd/MM/yyyy').format(DateTime.now());
+
+
 
   Future _selectDateStart() async {
     DateTime? picked = await showDatePicker(
@@ -316,10 +318,11 @@ class _CreateTaskState extends State<CreateTask> {
                         ),
                         alignment: Alignment.centerLeft,
                       ),
+                      SizedBox(height: 10,),
                       Container(
-                        padding: EdgeInsets.only(top: 8),
-                        height: MediaQuery.of(context).size.height - 680, //266
+                        height: controllerHome.titleCheckCreate.length*57, //266
                         child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
                           itemCount: controllerHome.titleCheckCreate.length,
                           itemBuilder: (context, index) {
                             return Container(
@@ -373,42 +376,47 @@ class _CreateTaskState extends State<CreateTask> {
                           },
                         ),
                       ),
-                      Container(
-                        height: 42,
-                        decoration: BoxDecoration(
-                            color: AppColors.color_scaffold,
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: AppColors.color702)),
-                        child: Center(
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Container(
-                                  height: 16,
-                                  width: 16,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.color702,
-                                      borderRadius: BorderRadius.circular(100),
-                                      border:
-                                          Border.all(color: AppColors.color702)),
-                                  child: Center(
-                                      child: Icon(
-                                    Icons.add,
-                                    color: AppColors.color_scaffold,
-                                    size: 14,
-                                  )),
+                      InkWell(
+                        onTap: (){
+                          _showDialogCreat();
+                        },
+                        child: Container(
+                          height: 42,
+                          decoration: BoxDecoration(
+                              color: AppColors.color_scaffold,
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(color: AppColors.color702)),
+                          child: Center(
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 10, right: 10),
+                                  child: Container(
+                                    height: 16,
+                                    width: 16,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.color702,
+                                        borderRadius: BorderRadius.circular(100),
+                                        border:
+                                            Border.all(color: AppColors.color702)),
+                                    child: Center(
+                                        child: Icon(
+                                      Icons.add,
+                                      color: AppColors.color_scaffold,
+                                      size: 14,
+                                    )),
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "Moodboard Research for Color",
-                                style: TextStyle(
-                                    fontSize: AppThemes.size14,
-                                    color: AppColors.color_text,
-                                    fontFamily: AppThemes.fonRegular),
-                              ),
-                            ],
+                                Text(
+                                  "Moodboard Research for Color",
+                                  style: TextStyle(
+                                      fontSize: AppThemes.size14,
+                                      color: AppColors.color_text,
+                                      fontFamily: AppThemes.fonRegular),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -479,5 +487,44 @@ class _CreateTaskState extends State<CreateTask> {
         ),
       ),
     );
+  }
+
+  Future<void> _showDialogCreat() {
+    return showDialog(
+        context: context,
+        builder: (Buildcontext) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            title: Text("Task Name"),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  TextField(
+                    controller: taskname2,
+                    decoration: InputDecoration(
+                      hintText: "Task Name"
+                    ),
+                  ),
+
+                  Padding(padding: EdgeInsets.only(top: 20)),
+                  TextButton(
+                      onPressed: () {
+                        Get.back();
+                        setState(() {
+                          controllerHome.titleCheckCreate.add(taskname2.text.toString());
+                          controllerHome.checkCreate.add(false);
+                        });
+                      },
+                    child: Text("Create",
+                        style: TextStyle(color: Colors.blue, fontSize: 16)),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

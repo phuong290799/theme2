@@ -165,6 +165,14 @@ class _TaskState extends State<Task> {
                                       onChanged: (value) {
                                         setState(() {
                                           controllerHome.check[index] = value!;
+                                          if(controllerHome.check[index]==true){
+                                            controllerHome.titleCheckCreate.add(controllerHome.titleCheck[index]);
+                                            controllerHome.checkCreate.add(false);
+                                          }
+                                          else {
+                                            controllerHome.titleCheckCreate.remove(controllerHome.titleCheck[index]);
+                                            controllerHome.checkCreate.remove(false);
+                                          }
                                         });
                                       }),
                                 ),
