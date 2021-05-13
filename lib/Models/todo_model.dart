@@ -7,10 +7,7 @@ class Todo extends Equatable {
   late String branding;
   Todo._internal();
   Todo(this.id,this.taskName,this.branding,this.division);
-  //
-  // late List<String> division;
-  // late List<String> taskName;
-  // late List<String> branding;
+
 
   @override
    List<Object> get props => [id];

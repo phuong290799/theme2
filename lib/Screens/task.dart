@@ -136,7 +136,7 @@ class _TaskState extends State<Task> {
                 height: MediaQuery.of(context).size.height-300,//266
                 child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),////////
-                  itemCount: controllerHome.titleCheck.length,
+                  itemCount: controllerHome.listTask.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),
@@ -144,9 +144,9 @@ class _TaskState extends State<Task> {
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 8),
                           decoration: BoxDecoration(
-                              color: controllerHome.check[index]?AppColors.color_scaffold:AppColors.color_form,
+                              color: controllerHome.listTask[index].isSelect?AppColors.color_scaffold:AppColors.color_form,
                               borderRadius: BorderRadius.circular(7),
-                              border: Border.all(color: controllerHome.check[index]?AppColors.color702:AppColors.color_form, width: 1)),
+                              border: Border.all(color: controllerHome.listTask[index].isSelect?AppColors.color702:AppColors.color_form, width: 1)),
                           child: Container(
                             height: 42,
                             child: Row(
@@ -161,23 +161,23 @@ class _TaskState extends State<Task> {
 
                                     ),
                                       activeColor: AppColors.color702,
-                                      value: controllerHome.check[index],
+                                      value: controllerHome.listTask[index].isSelect,
                                       onChanged: (value) {
                                         setState(() {
-                                          controllerHome.check[index] = value!;
-                                          if(controllerHome.check[index]==true){
-                                            controllerHome.titleCheckCreate.add(controllerHome.titleCheck[index]);
+                                          controllerHome.listTask[index].isSelect = value!;
+                                          if(controllerHome.listTask[index].isSelect==true){
+                                            controllerHome.titleCheckCreate.add(controllerHome.listTask[index].nameTask);
                                             controllerHome.checkCreate.add(false);
                                           }
                                           else {
-                                            controllerHome.titleCheckCreate.remove(controllerHome.titleCheck[index]);
+                                            controllerHome.titleCheckCreate.remove(controllerHome.listTask[index].nameTask);
                                             controllerHome.checkCreate.remove(false);
                                           }
                                         });
                                       }),
                                 ),
                                 Text(
-                                  controllerHome.titleCheck[index],
+                                  controllerHome.listTask[index].nameTask,
                                   style: TextStyle(
                                       fontSize: AppThemes.size14,
                                       color: AppColors.color_text,
@@ -187,14 +187,14 @@ class _TaskState extends State<Task> {
                                 Container(
                                   padding: EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
                                   decoration: BoxDecoration(
-                                    color: controllerHome.colors_text[index].withOpacity(0.1),
+                                    color: controllerHome.listTask[index].colorTask.withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Text(
-                                    controllerHome.title[index],
+                                    controllerHome.listTask[index].titleTask,
                                     style: TextStyle(
                                         fontSize: AppThemes.size10,
-                                        color: controllerHome.colors_text[index],
+                                        color: controllerHome.listTask[index].colorTask,
                                         fontFamily: AppThemes.fonMedium),
                                   ),
                                 ),
