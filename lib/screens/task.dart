@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_useinterface1/Controller/controller.dart';
-import 'package:flutter_useinterface1/Screens/create%20task.dart';
+import 'package:flutter_useinterface1/Screens/createTask.dart';
 import 'package:flutter_useinterface1/Theme/colors.dart';
 import 'package:flutter_useinterface1/Theme/style.dart';
 import 'package:get/get.dart';
@@ -17,6 +17,8 @@ class _TaskState extends State<Task> {
   int _selectedIndex = 0;
 
   int count_account =2;
+
+  bool value = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,65 +143,79 @@ class _TaskState extends State<Task> {
                     return Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       child:
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 8),
-                          decoration: BoxDecoration(
-                              color: controllerHome.listTask[index].isSelect?AppColors.color_scaffold:AppColors.color_form,
-                              borderRadius: BorderRadius.circular(7),
-                              border: Border.all(color: controllerHome.listTask[index].isSelect?AppColors.color702:AppColors.color_form, width: 1)),
+                       InkWell(
+                           onTap: ()
+                           {
+                             setState(() {
+                               controllerHome.listTask[index].isSelect = !controllerHome.listTask[index].isSelect;
+                               if(controllerHome.listTask[index].isSelect==true){
+                                 controllerHome.titleCheckCreate.add(controllerHome.listTask[index].nameTask);
+                                 controllerHome.checkCreate.add(false);
+                               }
+                               else {
+                                 controllerHome.titleCheckCreate.remove(controllerHome.listTask[index].nameTask);
+                                 controllerHome.checkCreate.remove(false);
+                               }
+                             });
+                           },
                           child: Container(
-                            height: 42,
-                            child: Row(
-                              children: [
-                                Transform.scale(
-                                  scale: 1,
-                                  child: Checkbox(
-                                    side:BorderSide(color: AppColors.color_border,width: 1),
-                                    shape:RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(3),
-                                      ),
-
+                            margin: EdgeInsets.symmetric(vertical: 8),
+                            decoration: BoxDecoration(
+                                color: controllerHome.listTask[index].isSelect?AppColors.color_scaffold:AppColors.color_form,
+                                borderRadius: BorderRadius.circular(7),
+                                border: Border.all(color: controllerHome.listTask[index].isSelect?AppColors.color702:AppColors.color_form, width: 1)),
+                            child: Container(
+                              height: 42,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.only(left: 12,right: 10),
+                                      child:  !controllerHome.listTask[index].isSelect?
+                                      Container(
+                                        height: 18,
+                                        width: 18,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(3),
+                                          border: Border.all(color: AppColors.color_border,width: 1),
+                                        ),
+                                      ): Container(
+                                          height: 18,
+                                          width: 18,
+                                          decoration: BoxDecoration(
+                                            color:AppColors.color702,
+                                            borderRadius: BorderRadius.circular(3),
+                                          ),
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.check,color: Colors.white,size: 13,
+                                        ),
+                                      ),),
                                     ),
-                                      activeColor: AppColors.color702,
-                                      value: controllerHome.listTask[index].isSelect,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          controllerHome.listTask[index].isSelect = value!;
-                                          if(controllerHome.listTask[index].isSelect==true){
-                                            controllerHome.titleCheckCreate.add(controllerHome.listTask[index].nameTask);
-                                            controllerHome.checkCreate.add(false);
-                                          }
-                                          else {
-                                            controllerHome.titleCheckCreate.remove(controllerHome.listTask[index].nameTask);
-                                            controllerHome.checkCreate.remove(false);
-                                          }
-                                        });
-                                      }),
-                                ),
-                                Text(
-                                  controllerHome.listTask[index].nameTask,
-                                  style: TextStyle(
-                                      fontSize: AppThemes.size14,
-                                      color: AppColors.color_text,
-                                      fontFamily: AppThemes.fonRegular),
-                                ),
-                                Expanded(child: SizedBox()),
-                                Container(
-                                  padding: EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
-                                  decoration: BoxDecoration(
-                                    color: controllerHome.listTask[index].colorTask.withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: Text(
-                                    controllerHome.listTask[index].titleTask,
+                                  Text(
+                                    controllerHome.listTask[index].nameTask,
                                     style: TextStyle(
-                                        fontSize: AppThemes.size10,
-                                        color: controllerHome.listTask[index].colorTask,
-                                        fontFamily: AppThemes.fonMedium),
+                                        fontSize: AppThemes.size14,
+                                        color: AppColors.color_text,
+                                        fontFamily: AppThemes.fonRegular),
                                   ),
-                                ),
-                                SizedBox(width: 9,),
-                              ],
+                                  Expanded(child: SizedBox()),
+                                  Container(
+                                    padding: EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
+                                    decoration: BoxDecoration(
+                                      color: controllerHome.listTask[index].colorTask.withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      controllerHome.listTask[index].titleTask,
+                                      style: TextStyle(
+                                          fontSize: AppThemes.size10,
+                                          color: controllerHome.listTask[index].colorTask,
+                                          fontFamily: AppThemes.fonMedium),
+                                    ),
+                                  ),
+                                  SizedBox(width: 9,),
+                                ],
+                              ),
                             ),
                           ),
                         ),

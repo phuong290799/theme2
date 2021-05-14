@@ -337,39 +337,49 @@ class _CreateTaskState extends State<CreateTask> {
                                           ? AppColors.color702
                                           : AppColors.color_form,
                                       width: 1)),
-                              child: Container(
-                                height: 42,
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 1,
-                                      child: Checkbox(
-                                          side: BorderSide(
-                                              color: AppColors.color_border,
-                                              width: 1),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(3),
-                                            ),
-                                          ),
-                                          activeColor: AppColors.color702,
-                                          value:
-                                              controllerHome.checkCreate[index],
-                                          onChanged: (value) {
-                                            setState(() {
-                                              controllerHome.checkCreate[index] =
-                                                  value!;
-                                            });
-                                          }),
-                                    ),
-                                    Text(
-                                      controllerHome.titleCheckCreate[index],
-                                      style: TextStyle(
-                                          fontSize: AppThemes.size14,
-                                          color: AppColors.color_text,
-                                          fontFamily: AppThemes.fonRegular),
-                                    ),
-                                  ],
+                              child:  InkWell(
+                                onTap: ()
+                                {
+                                  setState(() {
+                                    controllerHome.checkCreate[index] = !controllerHome.checkCreate[index] ;
+                                  });
+                                },
+                                child: Container(
+                                  height: 42,
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                    padding: const EdgeInsets.only(left: 12,right: 10),
+                                    child:  !  controllerHome.checkCreate[index]?
+                                    Container(
+                                      height: 18,
+                                      width: 18,
+                                      decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(3),
+                                      border: Border.all(color: AppColors.color_border,width: 1),
+                                      ),
+                                    ): Container(
+                                      height: 18,
+                                      width: 18,
+                                      decoration: BoxDecoration(
+                                      color:AppColors.color702,
+                                      borderRadius: BorderRadius.circular(3),
+                                      ),
+                                      child: Center(
+                                      child: Icon(
+                                        Icons.check,color: Colors.white,size: 13,
+                                      ),
+                                      ),),
+                                  ),
+                                      Text(
+                                        controllerHome.titleCheckCreate[index],
+                                        style: TextStyle(
+                                            fontSize: AppThemes.size14,
+                                            color: AppColors.color_text,
+                                            fontFamily: AppThemes.fonRegular),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );

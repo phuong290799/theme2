@@ -186,39 +186,57 @@ class _TaskDetailState extends State<TaskDetail> {
                                         ? AppColors.color702
                                         : AppColors.color_form,
                                     width: 1)),
-                            child: Container(
-                              height: 42,
-                              child: Row(
-                                children: [
-                                  Transform.scale(
-                                    scale: 1,
-                                    child: Checkbox(
-                                        side: BorderSide(
-                                            color: AppColors.color_border,
-                                            width: 1),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(3),
-                                          ),
+                            child: InkWell(
+                              onTap: ()
+                              {
+                                setState(() {
+                                  controllerDetail
+                                      .checkCreate[index]= ! controllerDetail
+                                      .checkCreate[index] ;
+                                });
+                              },
+                              child: Container(
+                                height: 42,
+                                child: Row(
+                                  children: [
+                                    Transform.scale(
+                                      scale: 1,
+                                      child:
+
+                                      Padding(
+                                          padding: const EdgeInsets.only(left: 12,right: 10),
+                                          child:  ! controllerDetail
+                                              .checkCreate[index]?
+                                          Container(
+                                            height: 18,
+                                            width: 18,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(3),
+                                              border: Border.all(color: AppColors.color_border,width: 1),
+                                            ),
+                                          ): Container(
+                                            height: 18,
+                                            width: 18,
+                                            decoration: BoxDecoration(
+                                              color:AppColors.color702,
+                                              borderRadius: BorderRadius.circular(3),
+                                            ),
+                                            child: Center(
+                                              child: Icon(
+                                                Icons.check,color: Colors.white,size: 13,
+                                              ),
+                                            ),),
                                         ),
-                                        activeColor: AppColors.color702,
-                                        value:
-                                            controllerDetail.checkCreate[index],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            controllerDetail
-                                                .checkCreate[index] = value!;
-                                          });
-                                        }),
-                                  ),
-                                  Text(
-                                    controllerDetail.titleCheckCreate[index],
-                                    style: TextStyle(
-                                        fontSize: AppThemes.size14,
-                                        color: AppColors.color_text,
-                                        fontFamily: AppThemes.fonRegular),
-                                  ),
-                                ],
+                                      ),
+                                    Text(
+                                      controllerDetail.titleCheckCreate[index],
+                                      style: TextStyle(
+                                          fontSize: AppThemes.size14,
+                                          color: AppColors.color_text,
+                                          fontFamily: AppThemes.fonRegular),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           );
@@ -381,7 +399,7 @@ class _TaskDetailState extends State<TaskDetail> {
                           },
                         ),
                       ),
-                     // Expanded(child: SizedBox()),
+                      // Expanded(child: SizedBox()),
                       InkWell(
                         onTap: () {
                           Get.bottomSheet(BottomSheetWidget());
@@ -395,10 +413,10 @@ class _TaskDetailState extends State<TaskDetail> {
                         child: Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Container(
-
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: AppColors.color_text)),
+                                border:
+                                    Border.all(color: AppColors.color_text)),
                             child: Center(
                               child: Icon(
                                 Icons.add,
@@ -560,66 +578,78 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     color: AppColors.color_scaffold,
                     borderRadius: BorderRadius.circular(7),
                   ),
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
-                    height: 50,
-                    child: Row(
-                      children: [
-                        Image.asset(controllerDetail.listMember[index].image),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              controllerDetail.listMember[index].name,
-                              style: TextStyle(
-                                  fontSize: AppThemes.size14,
-                                  color: AppColors.color354,
-                                  fontFamily: AppThemes.fonRegular),
-                            ),
-                            Text(
-                              controllerDetail.listMember[index].detail,
-                              style: TextStyle(
-                                  fontSize: AppThemes.size10,
-                                  color: AppColors.color_text,
-                                  fontFamily: AppThemes.fonRegular),
-                            ),
-                          ],
-                        ),
-                        Expanded(child: SizedBox()),
-                        Transform.scale(
-                          scale: 1,
-                          child: Checkbox(
-                              side: BorderSide(
-                                  color: AppColors.color_border, width: 1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(3),
-                                ),
+                  child:  InkWell(
+                    onTap: ()
+                    {
+                      setState(() {
+                        controllerDetail.listMember[index].isSelect = !controllerDetail.listMember[index].isSelect ;
+                        if (controllerDetail
+                            .listMember[index].isSelect ==
+                            true) {
+                          controllerDetail.listMemberSelect.add(
+                              controllerDetail.listMember[index]);
+                        } else {
+                          controllerDetail.listMemberSelect.remove(
+                              controllerDetail.listMember[index]);
+                        }
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
+                      height: 50,
+                      child: Row(
+                        children: [
+                          Image.asset(controllerDetail.listMember[index].image),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                controllerDetail.listMember[index].name,
+                                style: TextStyle(
+                                    fontSize: AppThemes.size14,
+                                    color: AppColors.color354,
+                                    fontFamily: AppThemes.fonRegular),
                               ),
-                              activeColor: AppColors.color702,
-                              value:
-                                  controllerDetail.listMember[index].isSelect,
-                              onChanged: (value) {
-                                setState(() {
-                                  controllerDetail.listMember[index].isSelect =
-                                      value!;
-                                  if (controllerDetail
-                                          .listMember[index].isSelect ==
-                                      true) {
-                                    controllerDetail.listMemberSelect.add(
-                                        controllerDetail.listMember[index]);
-                                  } else {
-                                    controllerDetail.listMemberSelect.remove(
-                                        controllerDetail.listMember[index]);
-                                  }
-                                });
-                              }),
-                        ),
-                      ],
+                              Text(
+                                controllerDetail.listMember[index].detail,
+                                style: TextStyle(
+                                    fontSize: AppThemes.size10,
+                                    color: AppColors.color_text,
+                                    fontFamily: AppThemes.fonRegular),
+                              ),
+                            ],
+                          ),
+                          Expanded(child: SizedBox()),
+
+                           Padding(
+                              padding: const EdgeInsets.only(left: 12,right: 10),
+                              child:  !controllerDetail.listMember[index].isSelect?
+                              Container(
+                                height: 18,
+                                width: 18,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3),
+                                  border: Border.all(color: AppColors.color_border,width: 1),
+                                ),
+                              ): Container(
+                                height: 18,
+                                width: 18,
+                                decoration: BoxDecoration(
+                                  color:AppColors.color702,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.check,color: Colors.white,size: 13,
+                                  ),
+                                ),),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 );
